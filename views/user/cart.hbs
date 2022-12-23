@@ -1,0 +1,124 @@
+{{!-- 
+<section>
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Item</th>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        hg
+
+        <tr>
+          <td scope="row">samsung</td>
+          <td><img style="height:50px;width:50px" src="/product-images/{{this.item}}.jpg" alt=""></td>
+          <td>watch</td>
+          <td><span>Rs. </span>77</td>
+          <td><button class="cart-item-count me-3 btn btn-warning">-</button> <span id="">7</span> <button
+              class="cart-item-count ms-3 btn btn-success">+</button></td>
+          <td><button href="" class="btn btn-danger">Remove</button></td>
+        </tr>
+
+
+
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h3 class="float-end mt-3 me-5">Cart total : <span id="total">7777</span></h3>
+    <a href="/place-order" class="mt-5 float-end btn btn-success" style="width:100% ;">Place Order</a>
+  </div>
+
+</section> --}}
+<section class="h-100 gradient-custom">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center my-4">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Cart </h5>
+          </div>
+          
+          <div class="card-body">
+           
+            
+
+            <!-- Single item -->
+            {{#each products}}
+            <div class="row" id="{{this.product._id}}element">
+              <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                <!-- Image -->
+                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                  <img src="/product-images/{{this.product._id}}.jpg" width="100px"
+                    class="w-1d00" />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                  </a>
+                </div>
+                <!-- Image -->
+              </div>
+
+              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                <!-- Data -->
+                <p><strong>{{this.product.name}}</strong></p>
+                <p>{{this.product.details}}</p>
+                <p></p>
+
+                <button type="button" class="btn btn-danger btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                  title="Remove item" onclick="deleteCartProduct('{{this._id}}','{{this.product._id}}','{{../user.id}}')">
+                  <i class="fas fa-trash"></i>
+                </button>
+               
+                <!-- Data -->
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <!-- Quantity -->
+                <div class="d-flex mb-4" style="max-width: 300px">
+                  <button class="btn btn-primary px-3 me-2 mr-2"
+                    onclick="changeQuantity('{{this.item}}','{{../user._id}}','{{this._id}}',-1)">
+                    <i class="fas fa-minus"></i>
+                  </button>
+
+                 <span id="{{this.product._id}}">{{this.quantity}}</span>
+
+                  <button class="btn btn-primary px-3 ms-2 ml-2" onclick="changeQuantity('{{this.item}}','{{../user._id}}','{{this._id}}',1)">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+                <!-- Quantity -->
+
+                <!-- Price -->
+                <p class="text-start text-md-center">
+                  <strong>${{this.product.price}}</strong>
+                </p>
+                <!-- Price -->
+              </div>
+              <hr class="my-4" />
+            </div>
+            
+            {{/each}}
+            <!-- Single item -->
+          </div>
+          
+        </div>
+       <div class="jumbotron jumbotron-fluid"><span class="ml-5 " id="total1"><strong >TOTAL : <strong id="total">${{total}}</strong> </strong></span>
+       <p><a href="/checkout"><button class="btn-lg btn-warning ml-5 mt-5 text-center btn">checkout</button></a></p>
+       </div>
+        
+      </div>
+      
+    </div>
+  </div>
+ 
+</section>
+<script>
+  
+</script>

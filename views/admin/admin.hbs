@@ -1,0 +1,78 @@
+
+
+  <section class="shop_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+        LIST OF PRODUCTS
+        </h2>
+        <div class="btn-box">
+                <a href="/admin/add-products/">
+                  ADD PRODUCTS
+                </a>
+              </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            {{!-- <th scope="col">1</th> --}}
+            <th scope="col">Item</th>
+            <th scope="col">Check out</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each products}}
+          <tr>
+            <th scope="row">{{inc @index}}</th>
+            <td><div class="img-box">
+                <img src="/product-images/{{this._id}}.jpg" class="mt-3"  width="100px" alt="">
+              </div></td>
+            <td> <div class="detail-box">
+                <h6>
+                  {{this.name}}
+                 <p>{{this.details}}</p>
+                 <p>lkknln</p>
+                </h6>
+                <h6>
+                  Price:
+                  <span>
+                    ${{this.price}}
+                  </span>
+                </h6>
+                
+              </div></td>
+            <td><div class="btn-box">
+                <a href="/admin/edit-products">
+                  DELETE
+                </a>
+              </div>
+            </td>
+            <td><div class="btn-box">
+              <a href="">
+                EDIT
+              </a>
+            </div>
+          </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <div class="row">
+       
+        <div class="col-sm-6 col-xl-3">
+          <div class="box">
+           
+              
+             
+            
+              
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  

@@ -1,0 +1,68 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:#f4f00d;
+            font-size:14px;
+            color:#fff;
+        }
+        .simple-login-container{
+            width:300px;
+            max-width:100%;
+            margin:50px auto;
+        }
+        .simple-login-container h2{
+            text-align:center;
+            font-size:20px;
+        }
+        
+        .simple-login-container .btn-login{
+            background-color:#FF5964;
+            color:#fff;
+        }
+        a{
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="simple-login-container">
+        <h2>Login Form</h2>
+        <form method="post" action="/login" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <input type="text" class="form-control" placeholder="Username" name="username">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <input type="password" placeholder="Enter your Password" class="form-control" name="password">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <input type="submit" class="btn btn-block btn-login">
+            </div>
+        </div>
+        <div class="row">
+            </form>
+            <div class="col-md-12">
+                <a href="/signup">or sign up</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
