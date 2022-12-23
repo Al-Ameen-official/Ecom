@@ -1,3 +1,4 @@
+const { ObjectID } = require('bson');
 var express = require('express');
 
 var router = express.Router();
@@ -30,7 +31,10 @@ router.post('/add-products', function (req, res,next) {
   })
 
 });
-router.get('/edit-products',function(req, res,next) {
+//edit products
+router.get('/edit-products/:id?',function(req,res,next) {
+  const id=req.params.id
+  
   res.render('admin/edit-product',{admin:true});
 });
 // router.get('/view-users', function(req, res) {
