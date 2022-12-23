@@ -22,7 +22,7 @@ app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__d
       return parseInt(value) + 1;
     }
 }}));
-app.set("view engine", "hbs")
+
 app.use(session({secret:"key",cookie:{maxAge : 600000 }}))
 app.use(logger('dev'));
 app.use(express.json());
