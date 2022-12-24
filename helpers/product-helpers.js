@@ -1,4 +1,5 @@
 db=require('../config/connection')
+const { response } = require('../app');
 const { PRODUCT_COLLECTION } = require('../config/collections');
 var collection=require('../config/collections')
 const objectId = require('mongodb').ObjectId
@@ -32,5 +33,28 @@ module.exports={
             resolve(cart.products)
         })
 
+    },
+    editProducts:(product)=>{
+
+        return new Promise((resolve, reject) => {
+           
+
+            db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(product.productId)},{
+               $set:{
+                  name:product.name,
+                  category:product.category,
+                  price:product.price,
+                  details:product.details,
+
+               }
+            }).then((response)=>{
+                
+                resolve(objectId(product.productId))
+            }
+            )
+
+            })
+
     }
+
 }

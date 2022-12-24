@@ -1,6 +1,5 @@
-const { ObjectID } = require('bson');
 var express = require('express');
-
+const objectId = require('mongodb').ObjectId
 var router = express.Router();
 
 var productHelpers = require('../helpers/product-helpers')
@@ -33,10 +32,26 @@ router.post('/add-products', function (req, res,next) {
 });
 //edit products
 router.get('/edit-products/:id?',function(req,res,next) {
-  const id=req.params.id
-  
-  res.render('admin/edit-product',{admin:true});
+  id=req.query.id
+  productHelpers.getProductDetails(id).then((product)=>{
+    
+  res.render('admin/edit-product',{admin:true,product});
+
+  })
 });
+router.post('/edit-products',function(req,res){
+  
+
+  productHelpers.editProducts(req.body).then((response)=>{
+   
+    res.redirect('/admin')
+    if(req.files.img!=null){
+      let image = req.files.img //to get the photo submitted through form, in binary format.
+    image.mv('./public/product-images/'+response+'.jpg');
+    }
+  })
+  
+})
 // router.get('/view-users', function(req, res) {
 //   res.render('admin/view-users');
 // });
