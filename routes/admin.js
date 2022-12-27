@@ -1,4 +1,5 @@
 var express = require('express');
+const { response } = require('../app');
 const objectId = require('mongodb').ObjectId
 var router = express.Router();
 
@@ -51,6 +52,17 @@ router.post('/edit-products',function(req,res){
     }
   })
   
+})
+///deleting products
+router.post('/deleteProducts',function(req,res){
+  productHelpers.deleteProduct(req.body.productId).then((response)=>{
+    res.json(response)
+  })
+})
+router.get('/view-users',function(req,res){
+  productHelpers.viewUsers().then((users)=>{
+    res.render('admin/view-users',{admin:true,users})
+  })
 })
 // router.get('/view-users', function(req, res) {
 //   res.render('admin/view-users');

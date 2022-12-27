@@ -16,25 +16,19 @@
           </tr>
         </thead>
         <tbody>
-          
+          {{#each users}}
           <tr>
-            <th scope="row">3</th>
-            <td><div class="img-box">
-                <img src="images/w1.png"  width="50p" alt="">
+            <th scope="row">{{inc @index}}</th>
+            <td><div class="img-bokx">
+                {{this.username}}
               </div></td>
             <td> <div class="detail-box">
-                <h6>
-                  Smartwatch
-                 <p>lkknln</p>
-                 <p>lkknln</p>
-                </h6>
-                <h6>
-                  Price:
-                  <span>
-                    $230
-                  </span>
-                </h6>
+               
+               {{this.phone}}
                 
+              </div></td>
+              <td><div class="img-box">
+                <img src="/user-images/{{this._id}}.jpg" class="mt-3"  width="100px" alt="">
               </div></td>
             <td><div class="btn-box">
                 <a href="">
@@ -42,13 +36,14 @@
                 </a>
               </div>
             </td>
-            <td><div class="btn-box">
+            {{!-- <td><div class="btn-box">
               <a href="">
                 EDIT
               </a>
             </div>
-          </td>
+          </td> --}}
           </tr>
+          {{/each}}
         </tbody>
       </table>
       <div class="row">

@@ -1,5 +1,6 @@
 
 
+
 let addToCart=(productId)=>{
    $.ajax({
     url:'/addToCart?id='+productId,
@@ -70,4 +71,23 @@ let deleteCartProduct=(cart,product,user)=>{
     }
     
 
+}
+let deleteProduct=(id)=>{
+    if(confirm("Are you sure you want to delete")){
+        $.ajax({
+            url:'/admin/deleteProducts',
+            data:{
+                productId:id
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.removed){
+                    document.getElementById(id+"product").remove()
+                    alert("Product removed")
+                }else{
+                    alert("product not removed")
+                }
+            }
+        })
+    }
 }

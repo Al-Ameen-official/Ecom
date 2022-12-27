@@ -101,8 +101,11 @@ router.get('/signup', function (req, res) {
 router.post('/signup', function (req, res) {
   console.log(req.body);
   userHelpers.doSignUp(req.body).then((response) => {
+     if(req.files.img!=null){
+      let image = req.files.img //to get the photo submitted through form, in binary format.
+    image.mv('./public/user-images/'+response+'.jpg');
+    }
     res.redirect('/login')
-   
   })
 
 })

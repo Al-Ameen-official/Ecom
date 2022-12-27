@@ -55,6 +55,22 @@ module.exports={
 
             })
 
+    },
+    deleteProduct:(id)=>{
+        return new Promise((resolve, reject) => {
+        db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:objectId(id)}).then((response)=>{
+            response.removed=true
+            resolve(response)
+        })
+        })
+    },//viewing users 
+    viewUsers:()=>{
+        return new Promise(async (resolve, reject) => {
+            let users =await db.get().collection(collection.USER_COLLECTION).find().toArray()
+            resolve(users)
+        })
+
     }
+   
 
 }
