@@ -82,7 +82,7 @@ let deleteProduct=(id)=>{
             method:'post',
             success:(response)=>{
                 if(response.removed){
-                    document.getElementById(id+"product").remove()
+                    document.getElementById().remove()
                     alert("Product removed")
                 }else{
                     alert("product not removed")
@@ -91,3 +91,27 @@ let deleteProduct=(id)=>{
         })
     }
 }
+let editUser=()=>{
+    $.ajax({
+        url:'/edit-user',
+        data:{
+            userId:document.getElementById("username").value,
+            phone:document.getElementById("phone").value,
+            email:document.getElementById("email").value,
+            userId:document.getElementById("userId").value,
+            firstpass:document.getElementById("firstpass").value
+        },
+        method:'post',
+        success:(response)=>{
+            if(response.status)
+            {
+                alert('changes saved')
+
+            }else{
+                alert("retry")
+            }
+        }
+        
+    })
+}    
+

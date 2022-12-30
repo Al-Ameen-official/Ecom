@@ -6,6 +6,7 @@ const bcrypt=require('bcrypt');
 const Razorpay = require('razorpay');
 const { response } = require('../app');
 
+
 let instance = new Razorpay({
     // key_id: process.env.RAZORPAY_KEY_ID,
     // key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -311,7 +312,60 @@ module.exports={
                 reject()
             }
         })
+    },
+    getUser:(id)=>{
+        return new Promise(async (resolve, reject) => {
+            
+             var user=await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(id)})
+                resolve(user)
+            
+        })
+
+    },
+    editUser:(editedUser)=>{
+        
+        return new Promise(async (resolve, reject) => {
+            
+            let user=await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(editedUser.userId)})
+            let response={
+                edited:false
+            }
+            if(user)
+            { 
+                bcrypt.compare(editedUser.firstpass,user.mainpass).then((status)=>{
+                    if(status){
+                        db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(editedUser.userId)},{
+                            $set:{
+                                username:editedUser.username,
+                                phone:editedUser.phone,
+                                email:editedUser.email,
+
+                            }
+                        })
+                        // response.edited=true
+                        // resolve(response)
+                        resolve({status:true})
+                    }
+                else{
+                    console.log("Login Failed!-wrong password");
+                    resolve({status:false});
+                    // response.edited=false
+                    // resolve(response)
+                }
+                })
+            }else{
+                console.log("Login Failed!-wrong credential");
+                    resolve({status:false});
+                    // response.edited=false
+                    // resolve(response)
+
+
+            }
+
+        })
+        
     }
+
    
 
     

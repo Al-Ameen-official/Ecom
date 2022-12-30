@@ -5,7 +5,6 @@ const userHelpers = require('../helpers/user-helpers');
 const { param } = require('./admin');
 var router = express.Router();
 
-
 const verifyLogin = (req,res,next)=>{
   if(req.session.loggedIn) {
     next();
@@ -201,5 +200,23 @@ router.post('/verify-payment',(req,res)=>{
     })
   })
 })
-
+router.get('/user-details',verifyLogin,async (req,res)=>{
+  let userId=req.session.user
+ 
+  let user=await userHelpers.getUser(userId._id)
+  
+  
+  res.render('user/userDetails',{admin:false,user})
+})
+router.get('/edit-user',verifyLogin,async(req,res)=>{
+  let userId=req.session.user
+  let user=await userHelpers.getUser(userId._id)
+  res.render('user/editUser',{admin:false,user})
+})
+router.post('/edit-user',(req,res)=>{
+  
+  userHelpers.editUser(req.body).then((response)=>{
+    res.json(response)
+  })
+})
 module.exports = router;
