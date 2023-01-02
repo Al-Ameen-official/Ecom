@@ -159,16 +159,19 @@ res.render('user/checkout',{admin:false,total,user})
 })
 ////placing order,
 router.post('/checkout',async (req,res)=>{
- 
-  
+  let userId=req.body.userId
+  let user={
+    _id:userId
+  }
+  let products=await userHelpers.getCartItems(user)
   let total=await userHelpers.getTotalCart(req.body.userId)
-  let products=await userHelpers.getCartItems(req.body.userId)
   userHelpers.placeOrder(req.body,products,total).then((responseAfterOrder)=>{
    
    
     if(responseAfterOrder.paymentMethod==='cod'){
       orderId=responseAfterOrder.orderId;
-      res.json({codPayment:true})
+      let resp={codPayment:true}
+      res.json(resp)
     }else if(responseAfterOrder.paymentMethod==='online'){
       userHelpers.getRazorPay(responseAfterOrder.orderId,total).then((response)=>{
         RayzerPayId=response.id
@@ -184,6 +187,7 @@ router.post('/checkout',async (req,res)=>{
 
   
 })
+////verify payment
 router.post('/verify-payment',(req,res)=>{
   //console.log(req.body);
   userHelpers.verifyPayment(req.body,RazorpayId).then(()=>{
@@ -200,6 +204,7 @@ router.post('/verify-payment',(req,res)=>{
     })
   })
 })
+///user profile
 router.get('/user-details',verifyLogin,async (req,res)=>{
   let userId=req.session.user
  
@@ -208,6 +213,7 @@ router.get('/user-details',verifyLogin,async (req,res)=>{
   
   res.render('user/userDetails',{admin:false,user})
 })
+///editing user
 router.get('/edit-user',verifyLogin,async(req,res)=>{
   let userId=req.session.user
   let user=await userHelpers.getUser(userId._id)
@@ -218,5 +224,19 @@ router.post('/edit-user',(req,res)=>{
   userHelpers.editUser(req.body).then((response)=>{
     res.json(response)
   })
+})
+///////////////order history
+router.get('/orders',verifyLogin,(req,res)=>{
+  let userId=req.session.user
+  
+  userHelpers.getOrders(userId._id).then((orders)=>{
+  
+    res.render('user/orders',{orders})
+   
+  })
+ 
+})
+router.get('/order-history',(req,res)=>{
+  res.render('user/orderDetails')
 })
 module.exports = router;

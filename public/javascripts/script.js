@@ -92,23 +92,29 @@ let deleteProduct=(id)=>{
     }
 }
 let editUser=()=>{
+    userName=document.getElementById('username').value;
+    userID=document.getElementById('userId').value;
+    Phone=document.getElementById('phone').value;
+    Email=document.getElementById('email').value;
+    password=document.getElementById('firstpass').value;
     $.ajax({
         url:'/edit-user',
         data:{
-            userId:document.getElementById("username").value,
-            phone:document.getElementById("phone").value,
-            email:document.getElementById("email").value,
-            userId:document.getElementById("userId").value,
-            firstpass:document.getElementById("firstpass").value
+            userId:userID,
+            phone:Phone,
+            email:Email,
+            username:userName,
+            firstpass:password
         },
         method:'post',
         success:(response)=>{
             if(response.status)
             {
                 alert('changes saved')
+                top.location.href="/";
 
             }else{
-                alert("retry")
+                alert("Password entered is wrong,Please retry")
             }
         }
         

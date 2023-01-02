@@ -130,9 +130,11 @@ module.exports={
             ]).toArray()
            
 
-            let cartCheck=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+            let cartCheck=await db.get().collection(CART_COLLECTION).findOne({user:objectId(userId)})
+            
             if(cartCheck){
                 resolve(cartProducts)
+              
             }else{
                 resolve()
             }
@@ -267,7 +269,7 @@ module.exports={
                 },
                 userId : objectId(orderDetails.userId),
                 paymentMethod : orderDetails.paymentMethod,
-                products : products,
+                product : products,
                 totalAmount : total,
                 status : status,
                 date: new Date().toLocaleString(undefined, {timeZone: 'Asia/Kolkata'})
@@ -364,6 +366,32 @@ module.exports={
 
         })
         
+    },
+    getOrders:(id)=>{
+        return new Promise(async (resolve, reject) => {
+            console.log(objectId(id));
+            let orders=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                {
+                    $match:{
+                        userId:objectId(id)
+                    },
+
+                }
+            ]).toArray()
+            console.log("++++++++++++");
+            console.log(orders);
+            console.log("++++++++++++");
+
+
+            resolve(orders)
+        })
+
+    },
+    getOrderDetails:(id)=>{
+        let total=db.get().collection(collection.ORDER_COLLECTION).findOne({_id:objectId(id)},{total:1,_id:0})
+        console.log("+++++++++++++++++++++")
+        console.log(total);
+
     }
 
    

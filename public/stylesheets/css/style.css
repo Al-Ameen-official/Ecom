@@ -916,3 +916,103 @@ a:focus {
 /*# sourceMappingURL=style.css.map */
 
 /*mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm*/
+.rrr {
+  
+  background-size: cover;
+  font-family: 'Lato', sans-serif;
+  color: rgba(116, 116, 116, 0.667);
+  background: linear-gradient(140deg , #fff , 50% , #f0d43a);    
+
+}
+
+
+p {
+  font-size: 14px;
+  
+
+}
+
+.small {
+  letter-spacing: 0.5px !important;
+}
+
+.card-1 {
+  box-shadow: 2px 2px 10px 0px #f0d43a;
+}
+
+hr {
+  background-color:#f0d43a;
+}
+
+
+.bold {
+  font-weight: 500;
+}
+
+.change-color {
+  color: #f0d43a !important;
+}
+
+.card-2 {
+  box-shadow: 1px 1px 3px 0px #f0d43a;
+
+}
+
+.fa-circle.active {
+  font-size: 8px;
+  color:#f0d43a;
+}
+
+.fa-circle {
+  font-size: 8px;
+  color: #f0d43a;
+}
+
+.rounded {
+  border-radius: 2.25rem !important;
+}
+
+
+.progress-bar {
+  background-color: #f0d43a !important;
+}
+
+
+.progress {
+  height: 5px !important;
+  margin-bottom: 0;
+}
+
+.invoice {
+  position: relative;
+  top: -70px;
+}
+
+.Glasses {
+  position: relative;
+  top: -12px !important;
+}
+
+.card-footer {
+  background-color: #f0d43a;
+  color: #fff;
+}
+
+h2 {
+  color: #f0d43a;
+  letter-spacing: 2px !important;
+}
+
+.display-3 {
+  font-weight: 500 !important;
+}
+
+
+.card-footer small {
+  letter-spacing: 7px !important;
+  font-size: 12px;
+}
+
+.border-line {
+  border-right: 1px solid rgb(226, 206, 226)
+}

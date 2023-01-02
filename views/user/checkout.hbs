@@ -203,12 +203,16 @@
   $('#checkoutform').on('submit',(event)=>{
     event.preventDefault();
     $.ajax({
-      url:'/checkout'
-      data:$('#checkoutform').serialize,
+      url:'/checkout',
+      
+      data:$('#checkoutform').serialize(),
+      method:'post',
+      
       success:(response)=>{
-        if(response.code == true)
-        {alert(response);
-        location.href='/orderPlacedSucceessfully'
+        
+        if(response.codPayment===true)
+        {alert("order placed");
+        location.href='/'
         }
       else{
         razorPayment(response)
@@ -257,6 +261,7 @@
     },
     success: (response)=>{
       if(response.status){
+        alert("order placed");
         location.href="/order-placed-successfully"
       }else {
         alert('Payment Failed!')

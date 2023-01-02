@@ -1,0 +1,49 @@
+<div class="container-fluid my-5  d-flex  justify-content-center rrr">
+        <div class="card card-1">
+            <div class="card-header bg-white">
+                <div class="media flex-sm-row flex-column-reverse justify-content-between  ">
+                    <div class="col my-auto"> <h4 class="mb-0">{{#if orders}}orders{{else}}order something{{/if}}<span class="change-color"></span> </h4> </div>
+                    <div class="col-auto text-center  my-auto pl-0 pt-sm-4">  </div>
+                </div>
+            </div>{{#each orders}}
+            <a href="/order-history" class="text-warning font-weight-bold">
+                <div class="card-body">
+                <div class="row justify-content-between mb-3">
+                    <div class="col-auto"> <h6 class="color-1 mb-0 change-color">{{inc @index}}</h6> </div>
+                    <div class="col-auto  ">ID: <small>{{this._id}}</small> </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card card-2">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="sq align-self-center mr-5">To  </div>
+                                    <div class="media-body my-auto text-right">
+                                        <div class="row  my-auto flex-column flex-md-row">
+                                            <div class="col my-auto"> <h6 class="mb-0"> {{this.orderDetails.address}}</h6>  </div>
+                                            <div class="col-auto my-auto"> <small> </small></div>
+                                            <div class="col my-auto"> <small>Status: {{this.status}}</small></div>
+                                            <div class="col my-auto"> <small></small></div>
+                                            <div class="col my-auto"><h6 class="mb-0">&#8377;TOTAL:{{this.totalAmount}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-3 ">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+               
+                <div class="row invoice ">
+                </div>
+            </div>
+            </a>
+            {{/each}}
+            <div class="card-footer">
+                
+            </div>
+        </div>
+    </div>
