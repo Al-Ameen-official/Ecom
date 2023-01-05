@@ -64,6 +64,11 @@ router.get('/view-users',function(req,res){
     res.render('admin/view-users',{admin:true,users})
   })
 })
+router.get('/allOrders',(req,res)=>{
+  productHelpers.getALlUsers().then((response)=>{
+    res.render('admin/orderHistory',{response})
+  })
+})
 // router.get('/view-users', function(req, res) {
 //   res.render('admin/view-users');
 // });

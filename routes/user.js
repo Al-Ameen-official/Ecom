@@ -236,7 +236,18 @@ router.get('/orders',verifyLogin,(req,res)=>{
   })
  
 })
-router.get('/order-history',(req,res)=>{
-  res.render('user/orderDetails')
+router.get('/order-history/:id?',(req,res)=>{
+  let id=req.query.id
+  userHelpers.getOrderDetails(id).then((response)=>{
+    let status=response.status
+    
+   
+
+    let Date=response.Date
+    let total=response.tot
+    let productslist=response.productslist
+    res.render('user/orderDetails',{Date,total,productslist,id,status})
+  })
+  
 })
 module.exports = router;

@@ -263,6 +263,7 @@ module.exports={
             let status=orderDetails.paymentMethod=='cod'?'placed':'pending'//if orderDetails.paymentMethod equalto COD, then status is assigned string value 'placed'.
             let OrderObject={
                 orderDetails:{
+                    name:orderDetails.name,
                     mobileNumber : orderDetails.phone,
                     address : orderDetails.address,
                     pincode : orderDetails.pincode
@@ -378,19 +379,62 @@ module.exports={
 
                 }
             ]).toArray()
-            console.log("++++++++++++");
-            console.log(orders);
-            console.log("++++++++++++");
-
+           
 
             resolve(orders)
         })
 
     },
-    getOrderDetails:(id)=>{
-        let total=db.get().collection(collection.ORDER_COLLECTION).findOne({_id:objectId(id)},{total:1,_id:0})
-        console.log("+++++++++++++++++++++")
-        console.log(total);
+    getOrderDetails:(id)=>{///yes I know this is not the right way
+        return new Promise(async (resolve, reject) => {
+            let total=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                {
+                    $match:{_id:objectId(id)}
+                },{
+                    $project:{totalAmount:1}
+                }
+            ]).toArray()
+            let productslist=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                {
+                    $match:{_id:objectId(id)} 
+                },{
+                    $unwind:'$product'
+                },{
+                    $project:{item:'$product.item',quantity:'$product.quantity'}
+                },{
+                     $lookup:{
+                         from:collection.PRODUCT_COLLECTION,
+                         localField:'item',
+                         foreignField:'_id',
+                         as:'productInfo'
+                     }
+                 },{
+                    $unwind:'$productInfo'
+                 },{
+                    $project:{name:'$productInfo.name',status:1,quantity:1,category:'$productInfo.category',id:'$productInfo._id',date:1}
+                 }
+            ]).toArray()
+        
+        let dateofOrder=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+            {$match:{_id:objectId(id)}
+        },{
+            $project:{date:1}
+        }
+        ]).toArray()
+        let Status=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+            {
+                $match:{_id:objectId(id)}
+            },{
+                $project:{status:1}
+            }
+        ]).toArray()
+         let tot=total[0].totalAmount
+         let Date=dateofOrder[0].date
+         let status=Status[0].status
+         
+        resolve({tot,productslist,Date,status})
+        })
+       
 
     }
 

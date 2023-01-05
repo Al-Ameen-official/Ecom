@@ -20,7 +20,14 @@ app.set('view engine', 'hbs');
 app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/',helpers: {
   inc: function (value, options) {
       return parseInt(value) + 1;
-    }
+    },
+    if_eq: function(a, b, opts) {
+      if (a == b) {
+          return opts.fn(this);
+      } else {
+          return opts.inverse(this);
+      }
+  }
 }}));
 
 app.use(session({secret:"key",cookie:{maxAge : 600000 }}))

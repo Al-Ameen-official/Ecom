@@ -10,36 +10,40 @@
             <div class="row">
               <div class="col mb-3">
                 <p class="small text-muted mb-1">Date</p>
-                <p>10 April 2021</p>
+                <p>{{Date}}</p>
               </div>
               <div class="col mb-3">
-                <p class="small text-muted mb-1">Order No.</p>
-                <p>012j1gvs356c</p>
+                <p class="small text-muted mb-1">Order Id.</p>
+                <p>ID{{id}}</p>
               </div>
             </div>
+            
+            {{#each productslist}}
 
             <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
               <div class="row">
                 <div class="col-md-8 col-lg-9">
-                  <p>BEATS Solo 3 Wireless Headphones</p>
+                  <p>{{this.name}}</p>
                 </div>
-                <div class="col-md-4 col-lg-3">
-                  <p>£299.99</p>
+                <div class="col-md-4 col-lg-3 ">
+                  {{!-- Cat:<p>£{{this.category}}</p> --}}
+                  <img src="/product-images/{{this.id}}.jpg" alt="" width="100px" class="rounded">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-8 col-lg-9">
-                  <p class="mb-0">Shipping</p>
+                  <p class="mb-0">Quantity:{{this.quantity}}</p>
                 </div>
-                <div class="col-md-4 col-lg-3">
-                  <p class="mb-0">£33.00</p>
-                </div>
+                {{!-- <div class="col-md-4 col-lg-3">
+                  <p class="mb-0">{{this.quantity}}</p>
+                </div> --}}
               </div>
             </div>
+            {{/each}}
 
             <div class="row my-4">
               <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                <p class="lead fw-bold mb-0" style="color: #f37a27;">£262.99</p>
+                <p class="lead fw-bold mb-0" style="color: #f37a27;">£{{total}}</p>
               </div>
             </div>
 
@@ -47,7 +51,59 @@
 
             <div class="row">
               <div class="col-lg-12">
+                {{#if_eq status 'placed'}}
+                <div class="horizontal-timeline">
 
+                  <ul class="list-inline items d-flex justify-content-between">
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Ordered</p
+                        class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                    </li>
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #ede7e3;">Shipped</p
+                        class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                    </li>
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #ede7e3;">On the way
+                      </p>
+                    </li>
+                    <li class="list-inline-item items-list text-end">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #ede7e3;">Delivered
+                      </p>
+                    </li>
+                    {{!-- <li class="list-inline-item items-list text-end" style="margin-right: 8px;">
+                      <p style="margin-right: -8px;">Delivered</p>
+                    </li> --}}
+                  </ul>
+
+                </div>
+                {{/if_eq}}
+                 {{#if_eq status 'shipped'}}
+                <div class="horizontal-timeline">
+
+                  <ul class="list-inline items d-flex justify-content-between">
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Ordered</p
+                        class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                    </li>
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Shipped</p
+                        class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                    </li>
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #ede7e3;">On the way
+                      </p>
+                    </li>
+                    <li class="list-inline-item items-list text-end">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #ede7e3;">Delivered
+                      </p>
+                    </li>
+                    
+                  </ul>
+
+                </div>
+                {{/if_eq}}
+                {{#if_eq status 'ontheway'}}
                 <div class="horizontal-timeline">
 
                   <ul class="list-inline items d-flex justify-content-between">
@@ -63,12 +119,41 @@
                       <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">On the way
                       </p>
                     </li>
-                    <li class="list-inline-item items-list text-end" style="margin-right: 8px;">
-                      <p style="margin-right: -8px;">Delivered</p>
+                    <li class="list-inline-item items-list text-end">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #ede7e3;">Delivered
+                      </p>
                     </li>
+                    
                   </ul>
 
                 </div>
+                {{/if_eq}}
+                  {{#if_eq status 'delivered'}}
+                <div class="horizontal-timeline">
+
+                  <ul class="list-inline items d-flex justify-content-between">
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Ordered</p
+                        class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                    </li>
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Shipped</p
+                        class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                    </li>
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">On the way
+                      </p>
+                    </li>
+                    <li class="list-inline-item items-list">
+                      <p class="py-1 px-2 rounded text-white" style="background-color: #0cf710;">On the way
+                      </p>
+                    </li>
+                   
+                    
+                  </ul>
+
+                </div>
+                {{/if_eq}}
 
               </div>
             </div>
